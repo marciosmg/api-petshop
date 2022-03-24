@@ -32,6 +32,11 @@ const roteador = require('./rotas/fornecedores');
 
 app.use('/api/fornecedores', roteador);
 
+app.use((requisicao, resposta, proximo) => {
+    resposta.set('X-Powered-By', 'Gatito Petshop')
+    proximo()
+});
+
 app.use((erro, requisicao, resposta, proximo) => {
     let status = 500
 
@@ -58,5 +63,6 @@ app.use((erro, requisicao, resposta, proximo) => {
       })
     )  
 });
+
 
 app.listen(config.get('api.porta'), () => console.log('A API está funcionando!'));
